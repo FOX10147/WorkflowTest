@@ -11,7 +11,7 @@ stages:
 - stage: Build
   jobs: 
   - job: BuildJob
-    DisplayName: Job Building
+    displayName: Job Building
     workspace:
       clean: outputs
     steps: 
@@ -22,7 +22,7 @@ stages:
 - stage: Test
   jobs:
   - job: TestProject
-    DisplayName: Project Testing
+    displayName: Project Testing
     dependsOn: Job Building
     steps:
     - script: |
