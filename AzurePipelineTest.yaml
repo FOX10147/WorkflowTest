@@ -58,5 +58,5 @@ stages:
                 kubernetesCluster: ${{ variables.kubernetesCluster }}
                 command: install
                 chartType: FilePath
-                chartName: helm/testchart:v1
+                chartPath: revprojectfactory.azurecr.io/helm/testchart:v1
             - script: echo "Finished Deploying Project"
