@@ -32,7 +32,6 @@ stages:
   jobs:
     - job: InstallHelm
       displayName: Install Helm
-      dependsOn: Project Testing
       steps:
       - script: echo "Installing Helm Chart..."
       - task: HelmInstaller@1
