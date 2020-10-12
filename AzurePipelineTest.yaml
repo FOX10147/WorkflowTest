@@ -1,20 +1,11 @@
 trigger:
 - master
 
-pool:
-- vmImage: 'ubuntu-latest'
-
 variables:
   azureSubscriptionEndpoint: Training
   azureContainerRegistry: revprojectfactory.azurecr.io
   azureResourceGroup: Project3
   kubernetesCluster: Project3Cluster
-
-checkout:
-clean: true
-branch: azurePipeTest
-path: https://github.com/FOX10147/WorkflowTest
-persistCredentials: false
 
 stages:
 - stage: Build
