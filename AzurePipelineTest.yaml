@@ -53,9 +53,9 @@ stages:
               displayName: Helm Deployment
               inputs:
                 connectionType: Azure Resource Manager
-                azureSubscriptionEndpoint: ${azureSubscriptionEndpoint}
-                azureResourceGroup: ${azureResourceGroup}
-                kubernetesCluster: ${kubernetesCluster}
+                azureSubscriptionEndpoint: ${{ variables.azureSubscriptionEndpoint }}
+                azureResourceGroup: ${{ variables.azureResourceGroup }}
+                kubernetesCluster: ${{ variables.kubernetesCluster }}
 #               command: install
 #               chartType: FilePath
 #               chartPath: Application/charts/sampleapp
