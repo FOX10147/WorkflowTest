@@ -41,12 +41,9 @@ stages:
 #       inputs:
 #         HelmVersionToInstall: latest
 - stage: Deploy  
-  jobs:
-- deployment: 
+- job:
     displayName: Project Deployment
     dependsOn: Project Testing
-    pool:
-     vmImage: 'ubuntu-16.04'
     environment: 
       strategy:
         runOnce:
