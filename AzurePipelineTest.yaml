@@ -58,5 +58,5 @@ stages:
                 kubernetesCluster: ${{ variables.kubernetesCluster }}
                 command: install
                 chartType: FilePath
-                chartPath: helm/testchart
+                chartPath: helm/testchart:v1
             - script: echo "Finished Deploying Project"
