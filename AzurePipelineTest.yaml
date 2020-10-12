@@ -46,10 +46,7 @@ stages:
         runOnce:
             deploy:
               steps: 
-              - script: | 
-                  echo "Deploying Project..."
-                  sh 'helm chart pull revproject.azurecr.io/helm/testchart:v1'
-                  sh 'helm chart export revproject.azurecr.io/helm/testchart:v1 \ --destination ./charts'
+              - script: echo "Deploying Project..."
               - task: HelmDeploy@0
                 displayName: Helm Deployment
                 inputs:
@@ -58,6 +55,6 @@ stages:
                   azureResourceGroup: ${{ variables.azureResourceGroup }}
                   kubernetesCluster: ${{ variables.kubernetesCluster }}
                   command: install
-                  chartType: Name
-                  chartName: helm/testchart:v1
+                  chartType: FilePath
+                  chartPath: $(System.DefaultWorkingDirectory)/revprojectfactory.azurecr.io/helm/testchart:v1
               - script: echo "Finished Deploying Project"
