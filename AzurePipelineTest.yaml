@@ -30,7 +30,7 @@ stages:
         echo "Finished Testing Project"
 - stage: InstallHelm
   jobs:
-    - job: Install Helm
+    - job: InstallHelm
       displayName: Install Helm
       dependsOn: Project Testing
       steps:
