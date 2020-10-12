@@ -23,7 +23,6 @@ stages:
   jobs:
   - job: TestProject
     displayName: Project Testing
-    dependsOn: Job Building
     steps:
     - script: |
         echo "Testing Project..."
@@ -44,7 +43,6 @@ stages:
   jobs:
   - deployment:
     displayName: Project Deployment
-    dependsOn: Project Testing
     strategy:
       runOnce:
           deploy:
