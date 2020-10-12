@@ -2,7 +2,7 @@ trigger:
 - master
 
 variables:
-  azureSubscriptionEndpoint: Training
+  azureSubscriptionEndpoint: Project3
   azureContainerRegistry: revprojectfactory.azurecr.io
   azureResourceGroup: Project3
   kubernetesCluster: Project3Cluster
