@@ -1,0 +1,8 @@
+trigger:
+- master
+
+name: Piperboi
+jobs:
+- job: Dingo
+  steps:
+  - script: echo First step!
