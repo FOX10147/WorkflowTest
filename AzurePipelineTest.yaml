@@ -28,17 +28,17 @@ stages:
         echo "Testing Project..."
         sh 'mvn test -Dcheckstyle.skip=true'
         echo "Finished Testing Project"
-# - stage: Install Helm
-#   jobs:
-#   - job: InstallHelm
-#     displayName: Install Helm Chart
-#     dependsOn: Project Testing
-#     steps:
-#     - script: echo "Installing Helm Chart..."
-#     - task: HelmInstaller@1
-#       displayName: Helm Installer
-#       inputs:
-#         HelmVersionToInstall: latest
+- stage: Install Helm
+  jobs:
+    - job: InstallHelm
+      displayName: Install Helm
+      dependsOn: Project Testing
+      steps:
+      - script: echo "Installing Helm Chart..."
+      - task: HelmInstaller@1
+        displayName: Install Helm
+        inputs:
+          HelmVersionToInstall: latest
 - stage: Deploy  
   jobs:
   - deployment:
