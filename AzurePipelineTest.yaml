@@ -43,6 +43,7 @@ stages:
   jobs:
   - deployment:
     displayName: Project Deployment
+    environment: 'Project3Cluster'
     strategy:
       runOnce:
           deploy:
