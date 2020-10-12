@@ -38,27 +38,26 @@ stages:
         displayName: Install Helm
         inputs:
           HelmVersionToInstall: latest
-- stage: Deploy  
-  jobs:
-  - deployment:
-    displayName: Project Deployment
-    environment: 'Project3Cluster'
-    strategy:
-      runOnce:
-          deploy:
-            steps: 
-            - script: | 
-                echo "Deploying Project..."
-                sh 'sudo helm chart pull revproject.azurecr.io/helm/testchart:v1'
-                sh 'sudo helm chart export revproject.azurecr.io/helm/testchart:v1 \ --destination ./charts'
-            - task: HelmDeploy@0
-              displayName: Helm Deployment
-              inputs:
-                connectionType: Azure Resource Manager
-                azureSubscriptionEndpoint: ${{ variables.azureSubscriptionEndpoint }}
-                azureResourceGroup: ${{ variables.azureResourceGroup }}
-                kubernetesCluster: ${{ variables.kubernetesCluster }}
-                command: install
-                chartType: Name
-                chartName: helm/testchart:v1
-            - script: echo "Finished Deploying Project"
+    - job:  
+    - deployment:
+      displayName: Project Deployment
+      environment: 'Project3Cluster'
+      strategy:
+        runOnce:
+            deploy:
+              steps: 
+              - script: | 
+                  echo "Deploying Project..."
+                  sh 'helm chart pull revproject.azurecr.io/helm/testchart:v1'
+                  sh 'helm chart export revproject.azurecr.io/helm/testchart:v1 \ --destination ./charts'
+              - task: HelmDeploy@0
+                displayName: Helm Deployment
+                inputs:
+                  connectionType: Azure Resource Manager
+                  azureSubscriptionEndpoint: ${{ variables.azureSubscriptionEndpoint }}
+                  azureResourceGroup: ${{ variables.azureResourceGroup }}
+                  kubernetesCluster: ${{ variables.kubernetesCluster }}
+                  command: install
+                  chartType: Name
+                  chartName: helm/testchart:v1
+              - script: echo "Finished Deploying Project"
