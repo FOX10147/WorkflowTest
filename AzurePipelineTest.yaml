@@ -56,7 +56,7 @@ stages:
                 azureSubscriptionEndpoint: ${{ variables.azureSubscriptionEndpoint }}
                 azureResourceGroup: ${{ variables.azureResourceGroup }}
                 kubernetesCluster: ${{ variables.kubernetesCluster }}
-#               command: install
-#               chartType: FilePath
-#               chartPath: Application/charts/sampleapp
+                command: install
+                chartType: FilePath
+                chartPath: helm/testchart
             - script: echo "Finished Deploying Project"
