@@ -6,7 +6,7 @@ pool:
 
 variables:
   azureSubscriptionEndpoint: Training
-  azureContainerRegistry: revprojectfactory
+  azureContainerRegistry: revprojectfactory.azurecr.io
   azureResourceGroup: Project3
   kubernetesCluster: Project3Cluster
 
