@@ -28,9 +28,9 @@ stages:
         echo "Testing Project..."
         sh 'mvn test -Dcheckstyle.skip=true'
         echo "Finished Testing Project"
-- stage: Install Helm
+- stage: InstallHelm
   jobs:
-    - job: InstallHelm
+    - job: Install Helm
       displayName: Install Helm
       dependsOn: Project Testing
       steps:
