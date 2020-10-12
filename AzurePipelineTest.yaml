@@ -49,8 +49,8 @@ stages:
             steps: 
             - script: | 
                 echo "Deploying Project..."
-                sudo helm chart pull revproject.azurecr.io/helm/testchart:v1
-                sudo helm chart export revproject.azurecr.io/helm/testchart:v1 \ --destination ./charts
+                sh 'sudo helm chart pull revproject.azurecr.io/helm/testchart:v1'
+                sh 'sudo helm chart export revproject.azurecr.io/helm/testchart:v1 \ --destination ./charts'
             - task: HelmDeploy@0
               displayName: Helm Deployment
               inputs:
