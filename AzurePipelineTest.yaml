@@ -48,7 +48,9 @@ stages:
       runOnce:
           deploy:
             steps: 
-            - script: echo "Deploying Project..."
+            - script: | 
+                echo "Deploying Project..."
+                sh 'helm chart pull revproject.azurecr.io/helm/testchart:v1'
             - task: HelmDeploy@0
               displayName: Helm Deployment
               inputs:
