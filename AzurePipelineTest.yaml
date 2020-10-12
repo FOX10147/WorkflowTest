@@ -1,0 +1,75 @@
+trigger:
+- master
+
+pool:
+- vmImage: 'ubuntu-latest'
+
+variables:
+  azureSubscriptionEndpoint: Training
+  azureContainerRegistry: revprojectfactory
+  azureResourceGroup: Project3
+  kubernetesCluster: Project3Cluster
+
+checkout:
+clean: true
+branch: azurePipeTest
+path: https://github.com/FOX10147/WorkflowTest
+persistCredentials: false
+
+stages:
+- stage: Build
+  jobs: 
+  - job: BuildJob
+    DisplayName: Job Building
+    workspace:
+      clean: outputs
+    steps: 
+    - script: |
+        echo "Building Project..."
+        sh 'mvn package -DskipTests=true -Dcheckstyle.skip=true'
+        echo "Finished Building Project"
+- stage: Test
+  jobs:
+  - job: TestProject
+    DisplayName: Project Testing
+    dependsOn: Job Building
+    steps:
+    - script: |
+        echo "Testing Project..."
+        sh 'mvn test -Dcheckstyle.skip=true'
+        echo "Finished Testing Project"
+# - stage: Install Helm
+#   jobs:
+#   - job: InstallHelm
+#     displayName: Install Helm Chart
+#     dependsOn: Project Testing
+#     steps:
+#     - script: echo "Installing Helm Chart..."
+#     - task: HelmInstaller@1
+#       displayName: Helm Installer
+#       inputs:
+#         HelmVersionToInstall: latest
+- stage: Deploy  
+  jobs:
+- deployment: 
+    displayName: Project Deployment
+    dependsOn: Project Testing
+    pool:
+     vmImage: 'ubuntu-16.04'
+    environment: 
+      strategy:
+        runOnce:
+          deploy:
+          steps: 
+          - script: echo "Deploying Project..."
+          - task: HelmDeploy@0
+            displayName: Helm Deployment
+            inputs:
+              connectionType: Azure Resources Manager
+              azureSubscriptionEndpoint: ${azureSubscriptionEndpoint}
+              azureResourceGroup: ${azureResourceGroup}
+              kubernetesCluster: ${kubernetesCluster}
+#               command: install
+#               chartType: FilePath
+#               chartPath: Application/charts/sampleapp
+          - script: echo "Finished Deploying Project"
