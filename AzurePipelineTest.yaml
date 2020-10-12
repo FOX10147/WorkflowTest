@@ -48,9 +48,7 @@ stages:
       runOnce:
           deploy:
             steps: 
-            - script: | 
-                echo "Deploying Project..."
-                sh 'helm chart pull revproject.azurecr.io/helm/testchart:v1'
+            - script: echo "Deploying Project..."
             - task: HelmDeploy@0
               displayName: Helm Deployment
               inputs:
@@ -59,6 +57,6 @@ stages:
                 azureResourceGroup: ${{ variables.azureResourceGroup }}
                 kubernetesCluster: ${{ variables.kubernetesCluster }}
                 command: install
-                chartType: FilePath
-                chartPath: https://revprojectfactory.azurecr.io/helm/testchart:v1
+                chartType: Name
+                chartPath: helm/testchart:v1
             - script: echo "Finished Deploying Project"
