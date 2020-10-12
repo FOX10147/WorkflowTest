@@ -41,7 +41,7 @@ stages:
 #       inputs:
 #         HelmVersionToInstall: latest
 - stage: Deploy  
-- job:
+  jobs:
     displayName: Project Deployment
     dependsOn: Project Testing
     environment: 
